@@ -7,18 +7,18 @@ adjoin_sssd_default_shell: '/bin/bash'
 adjoin_kerberos_enctypes: 'aes256-cts arcfour-hmac-md5'
 
 # Configure sudo permissions for the administrative groups in this file
-adjoin_configure_sudo: false
+adjoin_groups: 'Sanitized group 1, Sanitized group 2'
+adjoin_configure_sudo: true
 
 # Domains to join
 adjoin_domains:
-  - { name: 'prod.example.com',
-      workgroup: 'PROD',
+  - { name: 'sanitized.san.gov',
+      workgroup: 'group',
       domain_controllers: [
-        'dc1.prod.example.com',
-        'dc2.prod.example.com'
+         'snitized.san.gov'
       ],
-      ldap_base_dn: 'dc=prod,dc=example,dc=com',
+      ldap_base_dn: 'dc=sanitized,dc=san,dc=gov',
       computer_objects_path: 'SomeOU/Computers',
-      linux_admins: 'Linux Domain Admins',
-      username: 'administrator',
-      password: 'password' }
+      linux_admins: 'Domain Admins',
+      username: 'sanitized',
+      password: "{{ domain_test_password }}" }

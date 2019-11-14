@@ -13,6 +13,7 @@ default_shell = /sbin/nologin
 
 {% for domain in adjoin_domains %}
 [domain/{{ domain.name }}]
+access_provider = simple
 id_provider = ad
 krb5_realm = {{ domain.name|upper }}
 ldap_id_mapping = True
@@ -23,4 +24,5 @@ dyndns_update = false
 dns_resolver_timeout = 12
 debug_level = 3
 enumerate = false
+simple_allow_groups = {{ adjoin_groups }}
 {% endfor %}

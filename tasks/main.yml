@@ -3,6 +3,10 @@
   include_vars: "{{ ansible_os_family }}.yml"
   no_log: true
 
+- name: 'Include vaulted passwords'
+  include_vars: "vault.yml"
+  no_log: true
+
 - name: 'Install packages'
   include_tasks: "install-{{ ansible_os_family }}.yml"
 
@@ -42,8 +46,7 @@
       command: '/usr/bin/net ads join -s /etc/samba/smb_{{ domain.name }}.conf \
         -U{{ domain.username }}%{{ domain.password }} \
         osName="{{ ansible_distribution }}" \
-        osVer="{{ ansible_distribution_version }}" \
-        createcomputer={{ domain.computer_objects_path }}'
+        osVer="{{ ansible_distribution_version }}" '
       loop: "{{ adjoin_domains }}"
       loop_control:
         loop_var: 'domain'
@@ -92,4 +95,4 @@
     validate: "visudo -cf %s"
     owner: 'root'
     group: 'root'
-  when: adjoin_configure_sudo
+    when: adjoin_configure_sudo
