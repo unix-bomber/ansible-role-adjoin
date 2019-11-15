@@ -95,4 +95,4 @@
     validate: "visudo -cf %s"
     owner: 'root'
     group: 'root'
-    when: adjoin_configure_sudo
+  when: adjoin_configure_sudo
